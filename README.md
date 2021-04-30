@@ -29,33 +29,46 @@ insert  into b(`id`,`local`) values (6,'tianjin');
 
 
 测试01：返回左表所有行，右表符合on条件的原样匹配，不满足条件的补NULL
+
 SELECT a.id,a.name,b.local FROM a LEFT JOIN b ON a.id=b.id;
+
 ![MG)5}12$8AM4 {LJ$O}5~C](https://user-images.githubusercontent.com/83159371/115987431-b2c1b600-a5e7-11eb-868d-3b807bdb2920.png)
 
 测试02：on后面增加对右表的限制条件：b.local='beijing'
 结论02：左表记录全部返回，右表筛选条件生效
+
 SELECT a.id,a.name,b.local FROM a LEFT JOIN b ON a.id=b.id and b.local='beijing';
+
 ![image](https://user-images.githubusercontent.com/83159371/115987519-f4eaf780-a5e7-11eb-9194-48c549975d54.png)
 
 
 测试03：只在where后面增加对右表的限制条件：b.local='beijing'
 结论03：针对右表，相同条件，在where后面是对最后的临时表进行记录筛选，行数可能会减少；在on后面是作为匹配条件进行筛选，筛选的是右表的内容。
+
+SELECT a.id,a.name,b.local FROM a LEFT JOIN b ON a.id=b.id where b.local='beijing'; 
+
 ![image](https://user-images.githubusercontent.com/83159371/115987568-2794f000-a5e8-11eb-8a80-60d4e712c05e.png)
 
 
 测试04：a.name='a11' 或者 a.name='a33'
 结论04：on中对左表的限制条件，不影响返回的行数，只影响右表的匹配内容
+
 SELECT a.id,a.name,b.local FROM a LEFT JOIN b ON a.id=b.id and a.name='a11'; 
+
 ![image](https://user-images.githubusercontent.com/83159371/115987610-5b701580-a5e8-11eb-9de6-1cde803f640e.png)
 
 SELECT a.id,a.name,b.local FROM a LEFT JOIN b ON a.id=b.id and a.name='a33';
+
 ![image](https://user-images.githubusercontent.com/83159371/115987635-78a4e400-a5e8-11eb-863b-79fed6cfeabd.png)
 
 
 测试05：where a.name='a33' 或者 where a.name='a22'
 结论05：where条件是在最后临时表的基础上进行筛选，显示只符合最后where条件的行
+
 SELECT a.id,a.name,b.local FROM a LEFT JOIN b ON a.id=b.id where a.name='a33'; 
+
 ![image](https://user-images.githubusercontent.com/83159371/115987666-a0944780-a5e8-11eb-8c43-99f23954a3cd.png)
 
 SELECT a.id,a.name,b.local FROM a LEFT JOIN b ON a.id=b.id where a.name='a22';
+
 ![image](https://user-images.githubusercontent.com/83159371/115987699-c0c40680-a5e8-11eb-9f01-7e9526d7d41a.png)
