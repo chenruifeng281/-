@@ -29,6 +29,7 @@ insert  into b(`id`,`local`) values (6,'tianjin');
 
 
 测试01：返回左表所有行，右表符合on条件的原样匹配，不满足条件的补NULL
+SELECT a.id,a.name,b.local FROM a LEFT JOIN b ON a.id=b.id;
 ![MG)5}12$8AM4 {LJ$O}5~C](https://user-images.githubusercontent.com/83159371/115987431-b2c1b600-a5e7-11eb-868d-3b807bdb2920.png)
 
 测试02：on后面增加对右表的限制条件：b.local='beijing'
