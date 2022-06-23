@@ -32,7 +32,7 @@ insert  into b(`id`,`local`) values (6,'tianjin');
 
 SELECT a.id,a.name,b.local FROM a LEFT JOIN b ON a.id=b.id;
 
-![](https://github.com/chenruifeng281/-/blob/mysql/1.jpg）
+![image](https://github.com/chenruifeng281/-/blob/mysql/1.jpg）
 
 测试02：on后面增加对右表的限制条件：b.local='beijing'
 结论02：左表记录全部返回，右表筛选条件生效
